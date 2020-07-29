@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TurtleWorld.BusinesLogic.Interfaces;
 using TurtleWorld.BusinesLogic.Enums;
+using TurtleWorld.BusinesLogic.Common;
 
 namespace TurtleWorld.BusinesLogic.Entities
 {
@@ -19,9 +20,16 @@ namespace TurtleWorld.BusinesLogic.Entities
 
         private List<Point> exits = new List<Point>();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dimensions">the furthest point in the board, note that axes start with zero index, so for an N-dimension 
+        /// this param will be N-1 </param>
+        /// <param name="exits"></param>
+        /// <param name="mode"></param>
         public BoardSetUp(Point dimensions, IEnumerable<Point> exits, BoardModes mode = BoardModes.BouncingWalls)
         {
-            this.BorderMode = mode;
+            this.BoardMode = mode;
             this.BottomRight = dimensions;
 
             this.exits = new List<Point>(exits);
@@ -55,15 +63,46 @@ namespace TurtleWorld.BusinesLogic.Entities
         /// <returns></returns>
         public Point ValidateAgainstBordes(Point pointToMoveTo)
         {
+            Point res = pointToMoveTo;
             if (BoardModes.BouncingWalls == this.BoardMode)
             {
-                Point res = pointToMoveTo;
-                if(-1 == pointToMoveTo.X)
-                    res = new Point()
+                if (-1 == pointToMoveTo.X)
+                    res = new Point(0, pointToMoveTo.Y);
 
-                return res;
+                if (this.BottomRight.X + 1 == pointToMoveTo.X)
+                    res = new Point(this.BottomRight.X, pointToMoveTo.Y);
+
+                if (-1 == pointToMoveTo.Y)
+                    res = new Point(pointToMoveTo.X, 0);
+
+                if (this.BottomRight.Y + 1 == pointToMoveTo.Y)
+                    res = new Point(pointToMoveTo.X, this.BottomRight.Y);
+
             }
 
+            // merry-go-round mode
+            if (BoardModes.EarthMode == this.BoardMode)
+            {
+                if (-1 == pointToMoveTo.X)
+                    res = new Point(this.BottomRight.X, pointToMoveTo.Y);
+
+                if (this.BottomRight.X + 1 == pointToMoveTo.X)
+                    res = new Point(0, pointToMoveTo.Y);
+
+                if (-1 == pointToMoveTo.Y)
+                    res = new Point(pointToMoveTo.X, this.BottomRight.Y);
+
+                if (this.BottomRight.Y + 1 == pointToMoveTo.Y)
+                    res = new Point(pointToMoveTo.X, 0);
+            }
+
+            // outside of legitimate borders check
+            if (0 > pointToMoveTo.X || this.BottomRight.X < pointToMoveTo.X
+                || 0 > pointToMoveTo.Y || this.BottomRight.Y < pointToMoveTo.Y
+                )
+                throw new OutOfBoardException(pointToMoveTo);
+
+            return res;
         }
     }
 }
