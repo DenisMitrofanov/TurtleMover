@@ -10,7 +10,7 @@ namespace TurtleWorld.BusinesLogic.Entities
 {
     internal class BoardSetUp : IBoard
     {
-        public readonly BoardModes BorderMode;
+        public readonly BoardModes BoardMode;
 
         private readonly Point BottomRight; //defines dimensions of the board
 
@@ -47,11 +47,23 @@ namespace TurtleWorld.BusinesLogic.Entities
         public bool ProbeMine(Point p) => (0 <= mines.BinarySearch(p));
 
         public bool ProbeExit(Point p) => (0 <= exits.BinarySearch(p));
-        
 
+        /// <summary>
+        /// only handles the very edge of the board, every location far away from the board's borders is considered deadly
+        /// </summary>
+        /// <param name="pointToMoveTo"></param>
+        /// <returns></returns>
         public Point ValidateAgainstBordes(Point pointToMoveTo)
         {
-            throw new NotImplementedException();
+            if (BoardModes.BouncingWalls == this.BoardMode)
+            {
+                Point res = pointToMoveTo;
+                if(-1 == pointToMoveTo.X)
+                    res = new Point()
+
+                return res;
+            }
+
         }
     }
 }
