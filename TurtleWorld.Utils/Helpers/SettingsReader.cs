@@ -44,8 +44,15 @@ namespace TurtleWorld.Utils.Helpers
             return (int.Parse(m.Groups["X"].Value), int.Parse(m.Groups["Y"].Value));
         }
 
+        public static TurtleSetUpSettings ReadSettingsFromFile(string fileName)
+        {
+            using (StreamReader r = new StreamReader(fileName))
+                return ReadSettings(r);
+        }
 
-        public static TurtleSetUpSettings ReadSettings(StreamReader stream)
+
+        public static TurtleSetUpSettings ReadSettingsFromString(string content) => ReadSettings(new StringReader(content));
+        public static TurtleSetUpSettings ReadSettings(TextReader stream)
         {
             TurtleSetUpSettings res = new TurtleSetUpSettings();
             string line;
@@ -77,7 +84,7 @@ namespace TurtleWorld.Utils.Helpers
         }
 
         // laziness, although all mines are read eventually into memory in the BoardSetUp class anyway
-        private static IEnumerable<(int X, int Y)> ReadMines(StreamReader stream)
+        private static IEnumerable<(int X, int Y)> ReadMines(TextReader stream)
         {
             if (null == stream)
                 throw new ArgumentNullException("stream");

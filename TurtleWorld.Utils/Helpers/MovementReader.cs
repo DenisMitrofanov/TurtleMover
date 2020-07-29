@@ -18,7 +18,7 @@ namespace TurtleWorld.Utils.Helpers
     {
         private static string[] MoveNames = new string[] { "m", "move" };
         private static string[] RotateNames = new string[] { "r", "rotate", "turn" };
-        public static IEnumerable<MovementSteps> GetStreamLines(StreamReader stream)
+        public static IEnumerable<MovementSteps> ReadMovements(TextReader stream)
         {
             if (null == stream)
                 throw new ArgumentNullException("stream");
@@ -41,6 +41,15 @@ namespace TurtleWorld.Utils.Helpers
 
             throw new ArgumentException($"cannot recognize move, expected m/r, actual is {line}", line);
         }
+
+        public static IEnumerable<MovementSteps> ReadMovementsFromFile(string fileName)
+        {
+            using (StreamReader r = new StreamReader(fileName))
+                return ReadMovements(r);
+        }
+
+        public static IEnumerable<MovementSteps> ReadMovementsFromString(string content) => ReadMovements( new StringReader(content));
+        
     }
 
     public enum MovementSteps
