@@ -34,6 +34,11 @@ namespace TurtleWorld.BusinesLogic.Entities
             get => this.Item2;
         }
 
+        public override string ToString()
+        {
+            return $"{X}/{Y}";
+        }
+
         internal Point MoveTo(Directions d)
         {
             Point res;// = (Point) this.MemberwiseClone();

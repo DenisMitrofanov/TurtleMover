@@ -10,17 +10,28 @@ using TurtleWorld.BusinesLogic.Interfaces;
 
 namespace TurtleWorld.BusinesLogic.Entities
 {
-    public class Turtle
+    internal class Turtle : ITurtle
     {
-        public delegate void TurtleStateEventHandler(object sender, TurtleEventArgs e);
+        
 
         private IBoard mineBoard;
 
         #region Turtle state
+
         Directions orientation;
         Point currentPosition;
         TurtleState state = TurtleState.Alive;
 
+
+        public override string ToString()
+        {
+            return $"T is {State} facing {Orientation} at pos ({CurrentPosition}) on board ({mineBoard}) ";
+        }
+
+        public override int GetHashCode()
+        {
+            return new { orientation, currentPosition, state, mineBoard }.GetHashCode();
+        }
 
         TurtleState State
         {

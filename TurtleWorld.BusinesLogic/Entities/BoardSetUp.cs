@@ -25,7 +25,7 @@ namespace TurtleWorld.BusinesLogic.Entities
         /// </summary>
         /// <param name="dimensions">the furthest point in the board, note that axes start with zero index, so for an N-dimension 
         /// this param will be N-1 </param>
-        /// <param name="exits"></param>
+        /// <param name="exits">can be zero to </param>
         /// <param name="mode"></param>
         public BoardSetUp(Point dimensions, IEnumerable<Point> exits, BoardModes mode = BoardModes.BouncingWalls)
         {
@@ -33,7 +33,13 @@ namespace TurtleWorld.BusinesLogic.Entities
             this.BottomRight = dimensions;
 
             this.exits = new List<Point>(exits);
+            this.exits.ForEach(p => CheckIfIsInside(p));
             this.exits.Sort();
+        }
+
+        public override string ToString()
+        {
+            return $"B of ({BottomRight.X + 1}x{BottomRight.Y + 1}) with {mines.Count} mine(s)/";
         }
 
         /// <summary>
@@ -44,6 +50,7 @@ namespace TurtleWorld.BusinesLogic.Entities
         public void ReseedMines(IEnumerable<Point> mines)
         {
             this.mines = new List<Point>(mines);
+            this.mines.ForEach(p => CheckIfIsInside(p));
             this.mines.Sort();
         }
 
@@ -97,12 +104,17 @@ namespace TurtleWorld.BusinesLogic.Entities
             }
 
             // outside of legitimate borders check
+            CheckIfIsInside(pointToMoveTo);
+
+            return res;
+        }
+
+        private void CheckIfIsInside(Point pointToMoveTo)
+        {
             if (0 > pointToMoveTo.X || this.BottomRight.X < pointToMoveTo.X
                 || 0 > pointToMoveTo.Y || this.BottomRight.Y < pointToMoveTo.Y
                 )
-                throw new OutOfBoardException(pointToMoveTo);
-
-            return res;
+                throw new OutOfBoardException(pointToMoveTo, this.BottomRight);
         }
     }
 }

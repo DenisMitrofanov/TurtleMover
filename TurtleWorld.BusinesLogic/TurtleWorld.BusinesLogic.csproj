@@ -52,6 +52,7 @@
     <Compile Include="Enums\Directions.cs" />
     <Compile Include="Enums\TurtleState.cs" />
     <Compile Include="Interfaces\IBoard.cs" />
+    <Compile Include="Interfaces\ITurtle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

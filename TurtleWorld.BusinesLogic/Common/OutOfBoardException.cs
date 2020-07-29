@@ -9,7 +9,7 @@ namespace TurtleWorld.BusinesLogic.Common
 {
     internal class OutOfBoardException : Exception
     {
-        public OutOfBoardException(Point p):base()
+        public OutOfBoardException(Point p, Point dimensions):base( $"Point {p} doesn't belong to board of ({dimensions.X}x{dimensions.Y})")
         {
 
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TurtleWorld.BusinesLogic.Common
 {
+    public delegate void TurtleStateEventHandler(object sender, TurtleEventArgs e);
     public class TurtleEventArgs : EventArgs
     {
 
