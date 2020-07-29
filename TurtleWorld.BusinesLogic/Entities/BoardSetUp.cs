@@ -30,6 +30,10 @@ namespace TurtleWorld.BusinesLogic.Entities
         public BoardSetUp(Point dimensions, IEnumerable<Point> exits, BoardModes mode = BoardModes.BouncingWalls)
         {
             this.BoardMode = mode;
+
+            if (0 > dimensions.Y || 0 > dimensions.X)
+                throw new ArgumentException("Board's dimension must be greater than zero", "dimensions");
+
             this.BottomRight = dimensions;
 
             this.exits = new List<Point>(exits);
@@ -51,6 +55,12 @@ namespace TurtleWorld.BusinesLogic.Entities
         {
             this.mines = new List<Point>(mines);
             this.mines.ForEach(p => CheckIfIsInside(p));
+            this.mines.Sort();
+        }
+
+        public void ReseedMines(IEnumerable<(int X, int Y)> mines)
+        {
+            this.mines = mines.Select(m => CheckIfIsInside(new Point(m) ) ).ToList<Point>();
             this.mines.Sort();
         }
 
@@ -109,12 +119,14 @@ namespace TurtleWorld.BusinesLogic.Entities
             return res;
         }
 
-        private void CheckIfIsInside(Point pointToMoveTo)
+        public Point CheckIfIsInside(Point point)
         {
-            if (0 > pointToMoveTo.X || this.BottomRight.X < pointToMoveTo.X
-                || 0 > pointToMoveTo.Y || this.BottomRight.Y < pointToMoveTo.Y
+            if (0 > point.X || this.BottomRight.X < point.X
+                || 0 > point.Y || this.BottomRight.Y < point.Y
                 )
-                throw new OutOfBoardException(pointToMoveTo, this.BottomRight);
+                throw new OutOfBoardException(point, this.BottomRight);
+
+            return point;
         }
     }
 }

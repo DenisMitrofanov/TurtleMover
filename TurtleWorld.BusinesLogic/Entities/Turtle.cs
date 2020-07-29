@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Text;
@@ -83,7 +84,18 @@ namespace TurtleWorld.BusinesLogic.Entities
         #endregion
 
 
-        public Turtle(IBoard board) => this.mineBoard = board;
+        public Turtle(IBoard board, Point startPosition, 
+            Directions direction = Directions.North)// => this.mineBoard = board;
+        {
+            Debug.Assert(board != null);
+
+            this.mineBoard.CheckIfIsInside(startPosition);
+            //this.currentPosition = startPosition;
+            this.orientation = direction;
+
+            this.SetPositionAndState(startPosition, TurtleState.Alive);
+
+        }
 
 
         /// <summary>

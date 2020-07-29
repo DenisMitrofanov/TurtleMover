@@ -45,6 +45,7 @@
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\OutOfBoardException.cs" />
     <Compile Include="Common\TurtleEventArgs.cs" />
+    <Compile Include="Common\TurtleFactory.cs" />
     <Compile Include="Entities\BoardSetUp.cs" />
     <Compile Include="Entities\Point.cs" />
     <Compile Include="Entities\Turtle.cs" />

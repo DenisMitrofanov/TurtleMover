@@ -18,9 +18,14 @@ namespace TurtleWorld.BusinesLogic.Entities
     ///     |
     ///     Y
     /// </summary>
-    public class Point : Tuple<int, int>
+    internal class Point : Tuple<int, int>
     {
         public Point(int x, int y):base(x, y)
+        {
+
+        }
+
+        public Point( (int X, int Y) c ) : base(c.X, c.Y)
         {
 
         }
