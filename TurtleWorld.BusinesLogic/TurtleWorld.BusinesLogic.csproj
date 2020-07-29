@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\OutOfBoardException.cs" />
     <Compile Include="Common\TurtleEventArgs.cs" />

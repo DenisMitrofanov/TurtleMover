@@ -49,5 +49,23 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TurtleWorld.BusinesLogic\TurtleWorld.BusinesLogic.csproj">
+      <Project>{e02b276a-a034-4482-a49e-99759efb415a}</Project>
+      <Name>TurtleWorld.BusinesLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TurtleWorld.Utils\TurtleWorld.Utils.csproj">
+      <Project>{b14c8a2a-6c7b-4553-b1ee-97545aa839de}</Project>
+      <Name>TurtleWorld.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="game-settings.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="moves.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

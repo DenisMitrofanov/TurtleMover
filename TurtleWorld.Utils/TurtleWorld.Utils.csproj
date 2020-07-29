@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\CommenSkipper.cs" />
     <Compile Include="Helpers\MovementReader.cs" />
     <Compile Include="Helpers\SettingsReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

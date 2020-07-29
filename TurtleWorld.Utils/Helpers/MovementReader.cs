@@ -25,7 +25,7 @@ namespace TurtleWorld.Utils.Helpers
 
             string line;
 
-            while (null != (line = stream.ReadLine()))
+            while (null != (line = CommenSkipper.ReadLine(stream)))
             {
                 yield return ParseMovement(line.Trim());
             }

@@ -34,7 +34,7 @@ namespace TurtleWorld.Utils.Helpers
 
  
 
-        private static Lazy<Regex> coordinatesReg = new Lazy<Regex>( ()=>new Regex(@"(<X>\d+)\s+(<Y>\d+)", RegexOptions.Singleline | RegexOptions.Compiled));
+        private static Lazy<Regex> coordinatesReg = new Lazy<Regex>( ()=>new Regex(@"\s*(?<X>\d+)[\s\,]+(?<Y>\d+)\s*", RegexOptions.Singleline | RegexOptions.Compiled));
         private static (int X, int Y) ReadPoint(string line)
         {
             var m = coordinatesReg.Value.Match(line);
@@ -52,28 +52,30 @@ namespace TurtleWorld.Utils.Helpers
 
 
         public static TurtleSetUpSettings ReadSettingsFromString(string content) => ReadSettings(new StringReader(content));
+        
+        // TODO: comments support
         public static TurtleSetUpSettings ReadSettings(TextReader stream)
         {
             TurtleSetUpSettings res = new TurtleSetUpSettings();
             string line;
 
             //board side 
-            if (null == (line = stream.ReadLine()))
+            if (null == (line = CommenSkipper.ReadLine(stream)))
                 throw new Exception("Stream reader is incomplete - board size line is missing");
             res.BoardSize = ReadPoint(line);
 
             //starting point
-            if (null == (line = stream.ReadLine()))
+            if (null == (line = CommenSkipper.ReadLine(stream)))
                 throw new Exception("Stream reader is incomplete - starting point line is missing");
             res.StartingPoint = ReadPoint(line);
 
             //direction
-            if (null == (line = stream.ReadLine()))
+            if (null == (line = CommenSkipper.ReadLine(stream)))
                 throw new Exception("Stream reader is incomplete - direction line is missing");
             res.InitialOrientation = (Directions)Enum.Parse(typeof(Directions), line, true); //it's ok to get an exception
 
             //exit point
-            if (null == (line = stream.ReadLine()))
+            if (null == (line = CommenSkipper.ReadLine(stream)))
                 throw new Exception("Stream reader is incomplete - exit point line is missing");
             res.ExitPoint = ReadPoint(line);
 
@@ -83,6 +85,8 @@ namespace TurtleWorld.Utils.Helpers
             return res;
         }
 
+        
+
         // laziness, although all mines are read eventually into memory in the BoardSetUp class anyway
         private static IEnumerable<(int X, int Y)> ReadMines(TextReader stream)
         {
@@ -91,7 +95,7 @@ namespace TurtleWorld.Utils.Helpers
 
             string line;
 
-            while (null != (line = stream.ReadLine()))
+            while (null != (line = CommenSkipper.ReadLine(stream)))
             {
                 yield return ReadPoint(line); ;
             }
