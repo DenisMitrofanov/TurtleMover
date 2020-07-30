@@ -44,7 +44,7 @@ namespace TurtleWorld.BusinesLogic.Entities
             }
         }
 
-        Directions Orientation
+        internal Directions Orientation
         {
             get => this.orientation;
             set
@@ -54,7 +54,7 @@ namespace TurtleWorld.BusinesLogic.Entities
             }
         }
 
-        Point CurrentPosition
+        internal Point CurrentPosition
         {
             get => this.currentPosition;
             set
@@ -87,7 +87,9 @@ namespace TurtleWorld.BusinesLogic.Entities
         public Turtle(IBoard board, Point startPosition, 
             Directions direction = Directions.North)// => 
         {
-            Debug.Assert(board != null);
+            //Debug.Assert(board != null);
+            if (null == board)
+                throw new ArgumentNullException("board");
             this.mineBoard = board;
 
             this.mineBoard.CheckIfIsInside(startPosition);
