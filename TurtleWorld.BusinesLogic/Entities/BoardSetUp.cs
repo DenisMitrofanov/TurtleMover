@@ -13,12 +13,17 @@ namespace TurtleWorld.BusinesLogic.Entities
     {
         public readonly BoardModes BoardMode;
 
-        private readonly Point BottomRight; //defines dimensions of the board
+        public readonly Point BottomRight; //defines dimensions of the board
 
         // TODO: how often do we alter mines? cosider using Array instead
         private List<Point> mines = new List<Point>();
 
         private List<Point> exits = new List<Point>();
+
+        public Point Exit
+        {
+            get => exits.FirstOrDefault();
+        }
 
         /// <summary>
         /// 
@@ -31,7 +36,7 @@ namespace TurtleWorld.BusinesLogic.Entities
         {
             this.BoardMode = mode;
 
-            if (0 > dimensions.Y || 0 > dimensions.X)
+            if (0 >= dimensions.Y || 0 >= dimensions.X)
                 throw new ArgumentException("Board's dimension must be greater than zero", "dimensions");
 
             this.BottomRight = dimensions;
@@ -114,7 +119,7 @@ namespace TurtleWorld.BusinesLogic.Entities
             }
 
             // outside of legitimate borders check
-            CheckIfIsInside(pointToMoveTo);
+            CheckIfIsInside(res);
 
             return res;
         }
