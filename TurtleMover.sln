@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurtleChallenge", "ConsoleApp1\TurtleChallenge.csproj", "{48AEDFDB-288A-451F-880E-8D21C7C0F361}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurtleChallenge", "TurtleWorld.Console\TurtleChallenge.csproj", "{48AEDFDB-288A-451F-880E-8D21C7C0F361}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TurtleWorld.BusinesLogic", "TurtleWorld.BusinesLogic\TurtleWorld.BusinesLogic.csproj", "{E02B276A-A034-4482-A49E-99759EFB415A}"
 EndProject

@@ -26,7 +26,7 @@ namespace TurtleWorld.BusinesLogic.Entities
 
         public override string ToString()
         {
-            return $"T is {State} facing {Orientation} at pos ({CurrentPosition}) on board {{{mineBoard}}} ";
+            return $"T is {State}, facing {Orientation} at pos ({CurrentPosition}) on board {{{mineBoard}}} ";
         }
 
         public override int GetHashCode()
