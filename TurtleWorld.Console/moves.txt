@@ -2,8 +2,12 @@
 r
 m
 m
+
+#comment below to hit a mine
 m
 m
 r
 m
-m
+
+#uncomment to test attemt to move after already escaping 
+#m

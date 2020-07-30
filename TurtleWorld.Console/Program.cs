@@ -13,7 +13,6 @@ namespace ConsoleApp1
     {
         static int Main(string[] args)
         {
-            // Test if input arguments were supplied.
             if (args.Length != 2 || args.Contains("?"))
             {
                 Console.WriteLine("Wrong Number of arguments. Usage: TurtleChallenge <game-settings> <moves>");
@@ -44,7 +43,10 @@ namespace ConsoleApp1
                 {
                     DoAction(turtle, m);
                     Console.WriteLine($"Sequence {sequence++}: {m} : {turtle}");
+                    
                 }
+
+            // TODO : Should we check if turtle is still on the board after all movements are done? Should we break the loop above if the creature is dead already?
 
             return 0;
         }
