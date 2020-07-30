@@ -26,7 +26,7 @@ namespace TurtleWorld.BusinesLogic.Entities
 
         public override string ToString()
         {
-            return $"T is {State} facing {Orientation} at pos ({CurrentPosition}) on board ({mineBoard}) ";
+            return $"T is {State} facing {Orientation} at pos ({CurrentPosition}) on board {{{mineBoard}}} ";
         }
 
         public override int GetHashCode()
@@ -85,9 +85,10 @@ namespace TurtleWorld.BusinesLogic.Entities
 
 
         public Turtle(IBoard board, Point startPosition, 
-            Directions direction = Directions.North)// => this.mineBoard = board;
+            Directions direction = Directions.North)// => 
         {
             Debug.Assert(board != null);
+            this.mineBoard = board;
 
             this.mineBoard.CheckIfIsInside(startPosition);
             //this.currentPosition = startPosition;

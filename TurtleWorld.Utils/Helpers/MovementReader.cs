@@ -42,11 +42,8 @@ namespace TurtleWorld.Utils.Helpers
             throw new ArgumentException($"cannot recognize move, expected m/r, actual is {line}", line);
         }
 
-        public static IEnumerable<MovementSteps> ReadMovementsFromFile(string fileName)
-        {
-            using (StreamReader r = new StreamReader(fileName))
-                return ReadMovements(r);
-        }
+        public static IEnumerable<MovementSteps> ReadMovementsFromFile(string fileName) => ReadMovements(new StreamReader(fileName));
+        
 
         public static IEnumerable<MovementSteps> ReadMovementsFromString(string content) => ReadMovements( new StringReader(content));
         
@@ -54,6 +51,7 @@ namespace TurtleWorld.Utils.Helpers
 
     public enum MovementSteps
     {
+        Unknown = -1,
         Move,
         Rotate
     }

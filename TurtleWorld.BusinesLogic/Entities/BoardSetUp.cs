@@ -43,7 +43,7 @@ namespace TurtleWorld.BusinesLogic.Entities
 
         public override string ToString()
         {
-            return $"B of ({BottomRight.X + 1}x{BottomRight.Y + 1}) with {mines.Count} mine(s)/";
+            return $"B of ({BottomRight.X + 1}x{BottomRight.Y + 1}) exit(s) in ({exits.FirstOrDefault()}) with {mines.Count} mine(s)";
         }
 
         /// <summary>

@@ -44,16 +44,11 @@ namespace TurtleWorld.Utils.Helpers
             return (int.Parse(m.Groups["X"].Value), int.Parse(m.Groups["Y"].Value));
         }
 
-        public static TurtleSetUpSettings ReadSettingsFromFile(string fileName)
-        {
-            using (StreamReader r = new StreamReader(fileName))
-                return ReadSettings(r);
-        }
+        public static TurtleSetUpSettings ReadSettingsFromFile(string fileName) => ReadSettings(new StreamReader(fileName));
 
 
         public static TurtleSetUpSettings ReadSettingsFromString(string content) => ReadSettings(new StringReader(content));
         
-        // TODO: comments support
         public static TurtleSetUpSettings ReadSettings(TextReader stream)
         {
             TurtleSetUpSettings res = new TurtleSetUpSettings();
