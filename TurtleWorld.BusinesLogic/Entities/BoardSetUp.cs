@@ -74,9 +74,9 @@ namespace TurtleWorld.BusinesLogic.Entities
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public bool ProbeMine(Point p) => (0 <= mines.BinarySearch(p));
+        public bool ProbeMine(Point p) => (0 <= mines.BinarySearch( CheckIfIsInside (p)));
 
-        public bool ProbeExit(Point p) => (0 <= exits.BinarySearch(p));
+        public bool ProbeExit(Point p) => (0 <= exits.BinarySearch( CheckIfIsInside(p) ));
 
         /// <summary>
         /// only handles the very edge of the board, every location far away from the board's borders is considered deadly
